@@ -2,6 +2,8 @@
 This docker-compose file will provide a wordpress website with PHP + Apache + MySQL 
  
 
+[![Docker compose Build](https://github.com/AntoineGuerra/docker_wordpress/workflows/{workflow_name}/badge.svg)](https://github.com/AntoineGuerra/docker_wordpress/actions)
+
 ## Prerequisites
 
 Docker 1.10, either native or with docker-machine (Toolbox on Windows or Mac OS X : https://www.docker.com/docker-toolbox)
