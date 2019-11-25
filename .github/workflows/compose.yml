@@ -10,5 +10,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - name: Copy environnment file
+      run: cp .env.sample .env
     - name: Build the stack
       run: docker-compose up --build -d
