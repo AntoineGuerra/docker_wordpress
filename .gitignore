@@ -1,0 +1,7 @@
+# IDE
+.idea/
+# APPLE
+.DS_Store
+
+# Docker
+.env

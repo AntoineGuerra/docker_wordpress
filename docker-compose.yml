@@ -1,0 +1,72 @@
+version: '3.2'
+
+#networks:
+#  site:
+#    driver: bridge
+
+volumes:
+  db_data:
+
+services:
+  mysql:
+    build:
+      context: ./src/
+      dockerfile: mysql/Dockerfile
+      args:
+        MYSQL_VERSION: ${MYSQL_VERSION}
+#    command: --default-authentication-plugin=mysql_native_password
+#    ports:
+#      - ${MYSQL_PORT}:3306
+#    image: mysql:5.5.62
+    volumes:
+      - type: volume
+        source: db_data
+        target: /var/lib/mysql
+      - type: bind
+        source: ./src/mysql/sql-entrypoint
+        target: /docker-entrypoint-initdb.d
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+#    networks:
+#      - site
+
+  wordpress:
+    depends_on:
+      - mysql
+    image: wordpress:php${PHP_VERSION}-apache
+    volumes:
+      - ./src/site/:/var/www/html
+    ports:
+      - ${APACHE_PORT}:80
+      - ${APACHE_SSL_PORT}:443
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_USER: ${MYSQL_USER}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+#    networks:
+#      - site
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+      - PHP_UPLOAD_MAX_FILESIZE=1G
+      - PHP_MAX_INPUT_VARS=1G
+# ----- DEVELOPMENT -----
+# ----- Uncomment to auto connect at PMA -----
+#      - PMA_USER=$MYSQL_USER
+#      - PMA_PASSWORD=$MYSQL_PASSWORD
+    restart: always
+    ports:
+      - ${PHPMYADMIN_PORT}:80
+    expose:
+      - 8080
+    links:
+      - mysql:mysql
