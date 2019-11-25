@@ -2,8 +2,16 @@
 This docker-compose file will provide a wordpress website with PHP + Apache + MySQL 
  
 
-[![Docker compose Build](https://github.com/AntoineGuerra/docker_wordpress/workflows/docker-compose/badge.svg)](https://github.com/AntoineGuerra/docker_wordpress/actions)
+[![Docker compose Build](https://github.com/AntoineGuerra/docker_wordpress/workflows/docker-compose-build/badge.svg)](https://github.com/AntoineGuerra/docker_wordpress/actions)
 
+[![Issues](https://img.shields.io/github/issues-raw/AntoineGuerra/docker_wordpress.svg?maxAge=25000)](https://github.com/AntoineGuerra/docker_wordpress/issues)
+
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/AntoineGuerra/docker_wordpress.svg?style=flat)]()
+[![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
+
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+
+  
 ## Prerequisites
 
 Docker 1.10, either native or with docker-machine (Toolbox on Windows or Mac OS X : https://www.docker.com/docker-toolbox)
