@@ -1,7 +1,11 @@
 # IDE
 .idea/
+
 # APPLE
 .DS_Store
+
+# NPM
+node_modules/
 
 # Docker
 .env

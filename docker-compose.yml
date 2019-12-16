@@ -37,9 +37,15 @@ services:
   wordpress:
     depends_on:
       - mysql
-    image: wordpress:php${PHP_VERSION}-apache
+#    image: wordpress:php${PHP_VERSION}-apache
+    build:
+      context: ./src/
+      dockerfile: wordpress/Dockerfile
+      args:
+        PHP_VERSION: ${PHP_VERSION}
     volumes:
       - ./src/site/:/var/www/html
+#      - ./src/php/conf.d:/usr/local/etc/php/conf.d
     ports:
       - ${APACHE_PORT}:80
       - ${APACHE_SSL_PORT}:443

@@ -1,0 +1,20 @@
+#!/bin/sh
+FILES=$(git diff --cached --name-only --diff-filter=ACM "*.js" "*.ts" "*.php" "*.module" "*.inc" | sed 's| |\\ |g')
+[ -z "$FILES" ] && exit 0
+
+# Prettify all selected files
+error_output=$(echo "$FILES" | xargs ./node_modules/.bin/prettier --write 2>&1 > /dev/null)
+
+# Add back the modified/prettified files to staging
+echo "$FILES" | xargs git add
+
+if [[ ${error_output} ]]
+then
+    echo "\033[0;31m${error_output}"
+    exit 1
+else
+    echo "\033[0;32mprettier ran with success"
+    exit 0
+fi
+
+exit 0

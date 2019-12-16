@@ -1,0 +1,16 @@
+#!/bin/sh
+FILES=$(git diff --cached --name-only --diff-filter=ACM "*.php" "*.module" "*.inc" | sed 's| |\\ |g')
+[ -z "$FILES" ] && exit 0
+
+    # Run phplint on each selected files
+    error_output=$(echo "$FILES" | xargs ./node_modules/.bin/phplint 2>&1 > /dev/null)
+    if [[ ${error_output} ]]
+    then
+        echo "\033[0;31m${error_output}"
+        exit 1
+    else
+        echo "\033[0;32mphplint ran with success"
+        exit 0
+    fi
+
+

@@ -1,0 +1,110 @@
+{
+  "name": "good-commit",
+  "version": "1.0.0",
+  "description": "Configuration for good-commit",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "check-commit": "./node_modules/.bin/git-precommit-checks || (echo '\n\\033[0;31mYou have an commit-check fatal error Please see error above\\033[0m\n\n\\033[0;36mDont worry to contact us if you cant commit  📩 \\033[0m\n' && exit 1)",
+    "precise-prettier": "./.precise-prettier-php || (echo '\n\\033[0;31mYou have an prettier fatal error Please see error above\n\\033[0;36mDont worry to contact us if you cant commit  \uD83D\uDCE9 \\033[0m\n' && exit 1)",
+    "precise-phplint": "./.precise-phplint || (echo '\n\\033[0;31mYou have an phplint fatal error Please see error above\n\\033[0;36mDont worry to contact us if you cant commit  \uD83D\uDCE9 \\033[0m\n' && exit 1)",
+    "postinstall": "echo '\\033[0;36mThis repository is commitizen friendly, with prettier code style. Git commit hook was added to launch : \\033[0;32mgit-precommit-checks & prettier & commitizen & commitlint\\033[0m'",
+
+    "dump-sql": "./script/.dump_sql.sh",
+    "git-pull": "./script/.git_pull.sh",
+    "permission-wp-content": "./script/.permission-wp-content.sh",
+    "create-patch": "./script/.create_patch.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org:antoineguerra/good-commit.git"
+  },
+  "keywords": [
+    "git",
+    "commitlint",
+    "prettier",
+    "commitizen",
+    "commit",
+    "hook"
+  ],
+  "author": "antoine.guerra@epitech.eu",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/antoineguerra/good-commit#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^8.1.0",
+    "@commitlint/config-conventional": "^8.1.0",
+    "@prettier/plugin-php": "^0.11.2",
+    "commitizen": "^4.0.3",
+    "commitlint": "^8.1.0",
+    "git-precommit-checks": "^2.3.1",
+    "husky": "^3.0.2",
+    "phplint": "^2.0.1",
+    "prettier": "^1.18.2"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "./node_modules/.bin/commitlint -E HUSKY_GIT_PARAMS || (echo '\\033[0;31mPlease use \\033[0mgit commit \\033[0;31mWITHOUT -m option\\033[0m\n\\033[0;36mDont worry to contact us if you cant run commitizen  📩 \\033[0m\n' && exit 1)",
+      "pre-commit": "npm run check-commit --silent && npm run precise-prettier --silent && npm run precise-phplint --silent",
+      "prepare-commit-msg": "exec < /dev/tty && ./node_modules/.bin/git-cz --hook"
+    }
+  },
+  "git-precommit-checks": {
+    "display": {
+      "notifications": true,
+      "offending-content": true,
+      "rules-summary": true,
+      "short-stats": true,
+      "verbose": false
+    },
+    "rules": [
+      {
+        "filter": "[\\.js|\\.ts]$",
+        "nonBlocking": "true",
+        "message": "🤫 You’ve got leftover `console.log`",
+        "regex": "console\\.log"
+      },
+      {
+        "filter": "[\\.php|\\.module|\\.inc]$",
+        "nonBlocking": "true",
+        "message": "🤫 You’ve got leftover `var_dump`",
+        "regex": "var_dump\\(.*\\)"
+      },
+      {
+        "filter": "[\\.php|\\.module|\\.inc]$",
+        "nonBlocking": "true",
+        "message": "🤫 You’ve got leftover `kint`",
+        "regex": "kint\\(.*\\)"
+      },
+      {
+        "message": "😨 You’ve got leftover conflict markers",
+        "regex": "/^[<>|=]{4,}/m"
+      },
+      {
+        "message": "🤔 You have unfinished devs",
+        "nonBlocking": "true",
+        "regex": "(?:FIXME|TODO|fixme|todo)"
+      }
+    ]
+  },
+  "prettier": {
+    "printWidth": 80,
+    "tabWidth": 4,
+    "useTabs": true,
+    "singleQuote": true,
+    "trailingCommaPHP": "php7.2",
+    "braceStyle": "1tbs",
+    "requirePragma": false,
+    "insertPragma": true
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "git-cz"
+    }
+  },
+  "dependencies": {}
+}
