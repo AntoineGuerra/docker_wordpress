@@ -6,10 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "check-commit": "./node_modules/.bin/git-precommit-checks || (echo '\n\\033[0;31mYou have an commit-check fatal error Please see error above\\033[0m\n\n\\033[0;36mDont worry to contact us if you cant commit  📩 \\033[0m\n' && exit 1)",
-    "precise-prettier": "./.precise-prettier-php || (echo '\n\\033[0;31mYou have an prettier fatal error Please see error above\n\\033[0;36mDont worry to contact us if you cant commit  \uD83D\uDCE9 \\033[0m\n' && exit 1)",
-    "precise-phplint": "./.precise-phplint || (echo '\n\\033[0;31mYou have an phplint fatal error Please see error above\n\\033[0;36mDont worry to contact us if you cant commit  \uD83D\uDCE9 \\033[0m\n' && exit 1)",
+    "precise-prettier": "./.precise-prettier-php || (echo '\n\\033[0;31mYou have an prettier fatal error Please see error above\n\\033[0;36mDont worry to contact us if you cant commit  📩 \\033[0m\n' && exit 1)",
+    "precise-phplint": "./.precise-phplint || (echo '\n\\033[0;31mYou have an phplint fatal error Please see error above\n\\033[0;36mDont worry to contact us if you cant commit  📩 \\033[0m\n' && exit 1)",
     "postinstall": "echo '\\033[0;36mThis repository is commitizen friendly, with prettier code style. Git commit hook was added to launch : \\033[0;32mgit-precommit-checks & prettier & commitizen & commitlint\\033[0m'",
-
     "dump-sql": "./script/.dump_sql.sh",
     "git-pull": "./script/.git_pull.sh",
     "permission-wp-content": "./script/.permission-wp-content.sh",
@@ -106,5 +105,7 @@
       "path": "git-cz"
     }
   },
-  "dependencies": {}
+  "dependencies": {
+    "websocket": "^1.0.32"
+  }
 }

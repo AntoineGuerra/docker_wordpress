@@ -9,3 +9,5 @@ node_modules/
 
 # Docker
 .env
+
+tct_server/
